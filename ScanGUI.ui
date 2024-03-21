@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1945</width>
+    <height>1305</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QCheckBox" name="close_loop">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>518</x>
+     <y>82</y>
+     <width>111</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close Loop</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="P_Rest_Time">
+   <property name="geometry">
+    <rect>
+     <x>201</x>
+     <y>183</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="decimals">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>0.100000000000000</double>
+   </property>
+   <property name="value">
+    <double>0.100000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="C_Rest_Time">
+   <property name="geometry">
+    <rect>
+     <x>201</x>
+     <y>214</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="decimals">
+    <number>1</number>
+   </property>
+   <property name="maximum">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>0.100000000000000</double>
+   </property>
+   <property name="value">
+    <double>1.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_30">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>30</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Output</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="Console">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>50</y>
+     <width>611</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Welcome!&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;ScanGUI&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Copyright: Fan Lab @ HKUST&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="GraphicsLayoutWidget" name="IMG1" native="true">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>270</y>
+     <width>750</width>
+     <height>750</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="GraphicsLayoutWidget" name="IMG2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>270</y>
+     <width>750</width>
+     <height>750</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_23">
+   <property name="geometry">
+    <rect>
+     <x>79</x>
+     <y>133</y>
+     <width>96</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Scan Setting</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_31">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>1110</y>
+     <width>104</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Dynamic Range</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="set_offset">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>1180</y>
+     <width>171</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Set(Cannot undo)</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="select_area">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>1150</y>
+     <width>97</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select Area</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="set_zero">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>633</x>
+     <y>80</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Set Zero</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="go_to_zero">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>633</x>
+     <y>45</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Go to Zero</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="piezo_init">
+   <property name="geometry">
+    <rect>
+     <x>519</x>
+     <y>45</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Initialize</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_21">
+   <property name="geometry">
+    <rect>
+     <x>519</x>
+     <y>23</y>
+     <width>176</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Piezo Stage Controller</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="move">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>856</x>
+     <y>62</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Move</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="scan">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>1470</x>
+     <y>1100</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>SCAN</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="refresh">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>1370</x>
+     <y>1100</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="p_mode">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>156</y>
+     <width>139</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pluse Mode (P)</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="c_mode">
+   <property name="geometry">
+    <rect>
+     <x>226</x>
+     <y>156</y>
+     <width>179</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Continuous Mode (C)</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="set_ni">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>402</x>
+     <y>61</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ni_init">
+   <property name="geometry">
+    <rect>
+     <x>79</x>
+     <y>61</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Initialize</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_22">
+   <property name="geometry">
+    <rect>
+     <x>79</x>
+     <y>23</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>NI SMU</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="File_Name">
+   <property name="geometry">
+    <rect>
+     <x>1017</x>
+     <y>1089</y>
+     <width>171</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>img</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_24">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>1089</y>
+     <width>80</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>File Name:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="save_csv">
+   <property name="geometry">
+    <rect>
+     <x>990</x>
+     <y>1120</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save .csv</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="offset">
+   <property name="geometry">
+    <rect>
+     <x>153</x>
+     <y>1152</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>-1000</number>
+   </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_27">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>1150</y>
+     <width>56</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Offset:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_15">
+   <property name="geometry">
+    <rect>
+     <x>415</x>
+     <y>179</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>X:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>157</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pixel Number</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="Pixel_X">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>179</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>10</number>
+   </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="value">
+    <number>1000</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>517</x>
+     <y>210</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mm</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="Range_Y">
+   <property name="geometry">
+    <rect>
+     <x>438</x>
+     <y>210</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>20.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="Range_X">
+   <property name="geometry">
+    <rect>
+     <x>438</x>
+     <y>179</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>20.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_16">
+   <property name="geometry">
+    <rect>
+     <x>415</x>
+     <y>210</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Y:</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="Pixel_Y">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>210</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>10</number>
+   </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="value">
+    <number>1000</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>438</x>
+     <y>157</y>
+     <width>72</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Traversal</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>517</x>
+     <y>179</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mm</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>833</x>
+     <y>80</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mm</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>80</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Y:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>45</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>X:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>833</x>
+     <y>45</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mm</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="Move_X">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>756</x>
+     <y>47</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <double>-50.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>-1.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="Move_Y">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>756</x>
+     <y>82</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <double>-50.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>50.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>1.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>181</x>
+     <y>47</y>
+     <width>112</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Voltage Level:</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="Cur_Lim">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>80</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <double>100.000000000000000</double>
+   </property>
+   <property name="stepType">
+    <enum>QAbstractSpinBox::DefaultStepType</enum>
+   </property>
+   <property name="value">
+    <double>10.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>181</x>
+     <y>80</y>
+     <width>112</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Current Limit:</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="Voltage_Lv">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>47</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="decimals">
+    <number>2</number>
+   </property>
+   <property name="maximum">
+    <double>10.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>0.100000000000000</double>
+   </property>
+   <property name="stepType">
+    <enum>QAbstractSpinBox::DefaultStepType</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>377</x>
+     <y>80</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>377</x>
+     <y>47</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>V</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_18">
+   <property name="geometry">
+    <rect>
+     <x>82</x>
+     <y>214</y>
+     <width>112</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Rest Time (C):</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_20">
+   <property name="geometry">
+    <rect>
+     <x>291</x>
+     <y>215</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>s</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_19">
+   <property name="geometry">
+    <rect>
+     <x>291</x>
+     <y>184</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>s</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_17">
+   <property name="geometry">
+    <rect>
+     <x>82</x>
+     <y>183</y>
+     <width>112</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Rest Time (P):</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progress_bar">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>1040</y>
+     <width>791</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>100</number>
+   </property>
+  </widget>
+  <widget class="GraphicsLayoutWidget" name="Distribution" native="true">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>1020</y>
+     <width>750</width>
+     <height>50</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QRangeSlider" name="dynamic_range">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>1080</y>
+     <width>690</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="preview_offset">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>1150</y>
+     <width>171</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Preview</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="img2_to_img1">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>650</y>
+     <width>31</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>←</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="save_png">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>1120</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save .png</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="stop">
+   <property name="geometry">
+    <rect>
+     <x>1570</x>
+     <y>1100</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="ni_state_signal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>180</y>
+     <width>181</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ni/SMU State</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="piezo_state_signal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>210</y>
+     <width>231</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Piezo Stage State</string>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <zorder>label_23</zorder>
+  <zorder>label_31</zorder>
+  <zorder>set_offset</zorder>
+  <zorder>select_area</zorder>
+  <zorder>set_zero</zorder>
+  <zorder>go_to_zero</zorder>
+  <zorder>piezo_init</zorder>
+  <zorder>label_21</zorder>
+  <zorder>move</zorder>
+  <zorder>scan</zorder>
+  <zorder>refresh</zorder>
+  <zorder>p_mode</zorder>
+  <zorder>c_mode</zorder>
+  <zorder>set_ni</zorder>
+  <zorder>ni_init</zorder>
+  <zorder>label_22</zorder>
+  <zorder>File_Name</zorder>
+  <zorder>label_24</zorder>
+  <zorder>save_csv</zorder>
+  <zorder>offset</zorder>
+  <zorder>label_27</zorder>
+  <zorder>label_15</zorder>
+  <zorder>label_14</zorder>
+  <zorder>Pixel_X</zorder>
+  <zorder>label_9</zorder>
+  <zorder>Range_Y</zorder>
+  <zorder>Range_X</zorder>
+  <zorder>label_16</zorder>
+  <zorder>Pixel_Y</zorder>
+  <zorder>label_13</zorder>
+  <zorder>label_10</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_7</zorder>
+  <zorder>Move_X</zorder>
+  <zorder>Move_Y</zorder>
+  <zorder>label</zorder>
+  <zorder>Cur_Lim</zorder>
+  <zorder>label_2</zorder>
+  <zorder>Voltage_Lv</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_18</zorder>
+  <zorder>label_20</zorder>
+  <zorder>label_19</zorder>
+  <zorder>label_17</zorder>
+  <zorder>IMG2</zorder>
+  <zorder>IMG1</zorder>
+  <zorder>close_loop</zorder>
+  <zorder>P_Rest_Time</zorder>
+  <zorder>C_Rest_Time</zorder>
+  <zorder>label_30</zorder>
+  <zorder>Console</zorder>
+  <zorder>progress_bar</zorder>
+  <zorder>Distribution</zorder>
+  <zorder>dynamic_range</zorder>
+  <zorder>preview_offset</zorder>
+  <zorder>img2_to_img1</zorder>
+  <zorder>save_png</zorder>
+  <zorder>stop</zorder>
+  <zorder>ni_state_signal</zorder>
+  <zorder>piezo_state_signal</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsLayoutWidget</class>
+   <extends>QWidget</extends>
+   <header>pyqtgraph</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QRangeSlider</class>
+   <extends>QSlider</extends>
+   <header>qtrangeslider</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>NI_Init()</slot>
+ </slots>
+</ui>
