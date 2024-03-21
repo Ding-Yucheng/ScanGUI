@@ -68,7 +68,9 @@ class Stats(QMainWindow):
         self.bin_number = 100
         self.raw_data1 = np.rot90(Load_Csv("OIP.csv"), -1)
         self.data2 = np.zeros((1000, 1000))
-
+        
+        self.myMMC = None
+        self.smu = []
         # Events
         self.ui.ni_init.clicked.connect(self.NI_Init)
         self.ui.set_ni.clicked.connect(self.Set_NI)
@@ -146,67 +148,63 @@ class Stats(QMainWindow):
     def NI_Init(self):
         try:
             print("NI Initializing ...")
-            smu = []
-            smu.append(nidcpower.Session(resource_name='PXI1Slot2', channels='0', reset=True))
-            smu.append(nidcpower.Session(resource_name='PXI1Slot2', channels='1', reset=True))
+            self.smu = []
+            self.smu.append(nidcpower.Session(resource_name='PXI1Slot2', channels='0', reset=True))
+            self.smu.append(nidcpower.Session(resource_name='PXI1Slot2', channels='1', reset=True))
             ####################################################################
             # set internal avg filter, moving average
-            smu[1].samples_to_average = 10
+            self.smu[1].samples_to_average = 10
             # Set Output configuration
-            smu[1].voltage_level = 0  # set output voltage
-            smu[1].current_limit = 0.01  # set current limit
-            smu[1].current_limit_range = 0.01
-            smu[1].current_limit_autorange = True
-            self.ni_stat = True
+            self.smu[1].voltage_level = 0  # set output voltage
+            self.smu[1].current_limit = 0.01  # set current limit
+            self.smu[1].current_limit_range = 0.01
+            self.smu[1].current_limit_autorange = True
+            self.Ni_Stat(True)
             print("NI Initialized!")
         except:
-            #self.Ni_Error()
+            self.Ni_Stat(False)
             print("NI Initialization Error")
 
     def Set_NI(self):
         voltage_lv = self.ui.Voltage_Lv.value()
         cur_lim = self.ui.Cur_Lim.value() # in mA
         try:
-            smu[1].voltage_level = voltage_lv
+            self.smu[1].voltage_level = voltage_lv
             print("Set SMU voltage level to " + str(voltage_lv) + " V.")
-            smu[1].current_limit_range = cur_lim / 1000 # mA to A
+            self.smu[1].current_limit_range = cur_lim / 1000 # mA to A
             print("Set SMU current limit range to " + str(cur_lim) + " mA.")
         except:
-            self.ni_stat = False
+            self.Ni_Error()
             print("SMU Setting Error")
 
     def Piezo_Init(self):
         try:
             print("Piezo Stage Initialing ...")
             MMC.initialize(port='COM4', baudrate=38400)
-            myMMC = MMC()
-            print(myMMC.getPos(2), myMMC.getPos(1))
-            self.piezo_state = True
+            self.myMMC = MMC()
+            print(self.myMMC.getPos(2), self.myMMC.getPos(1))
+            self.Piezo_State(True)
             print("Piezo Stage Initialized!")
         except:
-            self.piezo_state = False
+            self.Piezo_State(False)
             print("Piezo Stage Initialization Error")
 
     def Go_To_Zero(self):
         try:
             print("Stage going to Zero ...")
-            myMMC.moveCnt(2, 50)
-            myMMC.moveCnt(1, -50)
-            print("Completed!")
-            print("Stage now at (" + str(myMMC.getPos(2))+ ", " + str(myMMC.getPos(1))+").")
+            self.myMMC.moveCnt(2, 50)
+            self.myMMC.moveCnt(1, -50)
         except:
-            self.piezo_state = False
+            self.Piezo_State(False)
             print("Piezo Stage Error: Cannot Go to Zero.")
 
     def Set_Zero(self):
         try:
-            print("Stage now at (" + str(myMMC.getPos(2))+ ", " + str(myMMC.getPos(1))+").")
             print("Setting as the new origin point ...")
-            myMMC.setZero(2)
-            myMMC.setZero(1)
-            print("Stage now at (" + str(myMMC.getPos(2))+ ", " + str(myMMC.getPos(1))+").")
+            self.myMMC.setZero(2)
+            self.myMMC.setZero(1)
         except:
-            self.piezo_state = False
+            self.Piezo_State(False)
             print("Piezo Stage Error: Cannot Set Zero Point.")
 
     def Switch_Close_Loop(self):
@@ -214,14 +212,14 @@ class Stats(QMainWindow):
         if CL.isChecked():
             try:
                 print("Trying to enable close loop mode")
-                myMMC.enableClosedLoop(2)
-                myMMC.enableClosedLoop(1)
+                self.myMMC.enableClosedLoop(2)
+                self.myMMC.enableClosedLoop(1)
                 self.ui.close_loop.setEnabled(False)
                 print("Succeed. Close Loop: ON.")
             except:
                 self.ui.close_loop.setChecked(False)
                 self.ui.close_loop.setEnabled(False)
-                self.piezo_state = False
+                self.Piezo_State(False)
                 print("Piezo Stage Error: Cannot Switch to Close Loop")
 
     def Switch_Scan_Mode(self):
@@ -236,11 +234,10 @@ class Stats(QMainWindow):
         move_y = self.ui.Move_Y.value()
         try:
             print("Trying to move to (" + str(move_x) + ", " + str(move_y) + ")...")
-            myMMC.move2Pos(2, move_x)
-            myMMC.move2Pos(1, move_y)
-            print("Finished. Stage now at (" + str(myMMC.getPos(2))+ ", " + str(myMMC.getPos(1))+").")
+            self.myMMC.move2Pos(2, move_x)
+            self.myMMC.move2Pos(1, move_y)
         except:
-            self.piezo_state = False
+            self.Piezo_State(False)
             print("Piezo Stage Error: Movement Error.")
 
     def Select_Area(self):
@@ -337,9 +334,9 @@ class Stats(QMainWindow):
         if n < 0:
             n = -n
             odd_even = 1
-        result = np.empty((self.raw_data1.shape[0], self.raw_data1.shape[1] - n), dtype=self.raw_data1.dtype)
         raw_data1 = np.rot90(self.raw_data1, -1)
-        for i in range(self.raw_data1.shape[0]):
+        result = np.empty((raw_data1.shape[0], raw_data1.shape[1] - n), dtype=raw_data1.dtype)
+        for i in range(raw_data1.shape[0]):
             if i % 2 == odd_even:
                 result[i] = raw_data1[i, n:]
             else:
@@ -403,13 +400,15 @@ class Stats(QMainWindow):
         self.ui.Voltage_Lv.setEnabled(bool)
         self.ui.Cur_Lim.setEnabled(bool)
         if bool and self.piezo_state:
-            self.ui.scan.setEnabled(bool)
-            self.ui.refresh.setEnabled(bool)
-            self.ui.stop.setEnabled(not bool)
+            self.ui.scan.setEnabled(True)
+            self.ui.refresh.setEnabled(True)
+            self.ui.stop.setEnabled(False)
         if not bool:
-            self.ui.scan.setEnabled(bool)
-            self.ui.refresh.setEnabled(bool)
-            self.ui.stop.setEnabled(not bool)
+            self.ui.scan.setEnabled(False)
+            self.ui.refresh.setEnabled(False)
+            if self.ui.stop.isEnabled():
+                self.Stop()
+                self.ui.stop.setEnabled(False)
 
     def Piezo_State(self, bool):
         self.piezo_state = bool
@@ -419,13 +418,15 @@ class Stats(QMainWindow):
         self.ui.Move_X.setEnabled(bool)
         self.ui.Move_Y.setEnabled(bool)
         if bool and self.ni_stat:
-            self.ui.scan.setEnabled(bool)
-            self.ui.refresh.setEnabled(bool)
-            self.ui.stop.setEnabled(not bool)
+            self.ui.scan.setEnabled(True)
+            self.ui.refresh.setEnabled(True)
+            self.ui.stop.setEnabled(False)
         if not bool:
-            self.ui.scan.setEnabled(bool)
-            self.ui.refresh.setEnabled(bool)
-            self.ui.stop.setEnabled(not bool)
+            self.ui.scan.setEnabled(False)
+            self.ui.refresh.setEnabled(False)
+            if self.ui.stop.isEnabled():
+                self.Stop()
+                self.ui.stop.setEnabled(False)
 
     def Scan(self):
         if not self.scan_thread.isRunning():
@@ -443,11 +444,10 @@ class Stats(QMainWindow):
         self.Go_To_Zero()
         self.Scanning_Lock(True)
 
-
-
 class ScanThread(QThread):
     updated_image = pyqtSignal(np.ndarray)
     progress = pyqtSignal(int)
+
     def __init__(self, ui):
         QThread.__init__(self)
         self.ui = ui
@@ -456,6 +456,8 @@ class ScanThread(QThread):
         self.stats = None
 
     def run(self):
+        self.myMMC = self.stats.myMMC
+        self.smu = self.stats.smu
         self.is_running = True
         size_x = self.ui.Range_X.value()  # mm
         size_y = self.ui.Range_Y.value()  # mm
@@ -476,9 +478,9 @@ class ScanThread(QThread):
             freq = dwelltime/pixel_x  # in second
             for j in range(pixel_y):
                 try:
-                    myMMC.moveCnt(2, step_x if j % 2 else -step_x)  # first move
+                    self.myMMC.moveCnt(2, step_x if j % 2 else -step_x)  # first move
                 except:
-                    self.piezo_state = False
+                    self.stats.Piezo_State(False)
                     print("Piezo Stage Error.")
                 start = len(img) - 1 if j % 2 else 0
                 end = -1 if j % 2 else len(img)
@@ -488,9 +490,9 @@ class ScanThread(QThread):
                         break
                     cnt += 1
                     try:
-                        img[i, j] = smu[1].measure(nienums.MeasurementTypes.CURRENT)
+                        img[i, j] = self.smu[1].measure(nienums.MeasurementTypes.CURRENT)
                     except:
-                        self.ni_state = False
+                        self.stats.Ni_Stat(False)
                         img[i, j] = np.random.random_sample()
                     try:
                         self.updated_image.emit(img)
@@ -502,8 +504,9 @@ class ScanThread(QThread):
                 if self.is_running == False:
                     break
                 try:
-                    myMMC.moveCnt(1, step_y)
+                    self.myMMC.moveCnt(1, step_y)
                 except:
+                    self.stats.Piezo_State(False)
                     print("Piezo Stage Error.")
                 time.sleep(stepDelay)
 
@@ -522,11 +525,10 @@ class ScanThread(QThread):
                         break
                     cnt += 1
                     try:
-                        img[i, j] = smu[1].measure(nienums.MeasurementTypes.CURRENT)
+                        img[i, j] = self.smu[1].measure(nienums.MeasurementTypes.CURRENT)
                     except:
-                        self.ni_state = False
                         img[i, j] = np.random.random_sample()
-                        print(img[i,j])
+                        self.stats.Ni_Stat(False)
                         print("SMU Error.")
                     try:
                         self.progress.emit(cnt)
@@ -534,14 +536,15 @@ class ScanThread(QThread):
                     except:
                         print("Thread Error")
                     try:
-                        myMMC.moveCnt(2, step * step_x)
+                        self.myMMC.moveCnt(2, step * step_x)
                     except:
+                        self.stats.Piezo_State(False)
                         print("Piezo Stage Error.")
                     time.sleep(stepDelay)
                 try:
-                    myMMC.moveCnt(1, step_y)
+                    self.myMMC.moveCnt(1, step_y)
                 except:
-                    self.piezo_state = False
+                    self.stats.Piezo_State(False)
                     print("Piezo Stage Error.")
                 time.sleep(stepDelay)
                 if self.is_running == False:
@@ -551,6 +554,7 @@ class ScanThread(QThread):
             except:
                 print("Keithley Error.")
         self.is_running = False
+
     def stop(self):
         self.is_running = False
 
